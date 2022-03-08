@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
 
     public int thrust = 1000;
+    public ParticleSystem deathParticles;
 
     private Rigidbody2D rb2D;
 
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     {
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         rb2D.velocity = Vector2.right * 5;
+        rb2D.velocity += Vector2.up * 10;
     }
 
     void Update()
@@ -49,6 +51,9 @@ public class Player : MonoBehaviour
     void OnBecameInvisible()
     {
         Debug.Log("I`m gone :(");
+
+        Instantiate (deathParticles, this.transform.position, Quaternion.identity);
+
     }
 
 }
