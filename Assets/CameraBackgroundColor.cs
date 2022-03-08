@@ -11,7 +11,6 @@ public class CameraBackgroundColor : MonoBehaviour
     private float hue = 150;
     private float saturation = 75;
     private float value = 50;
-    private bool inc = true;
 
     // Start is called before the first frame update
     void Start()
