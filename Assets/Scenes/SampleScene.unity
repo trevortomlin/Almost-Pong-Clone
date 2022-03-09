@@ -812,13 +812,15 @@ MonoBehaviour:
   - name: PaddleHit
     clip: {fileID: 8300000, guid: 24d18f02a8c16f546ba5d6698769759e, type: 3}
     volume: 1
-    pitch: 0.61
+    pitch: 0.55
     source: {fileID: 0}
   - name: Death
     clip: {fileID: 8300000, guid: dc20c4d623314894f8be2e1145d4ef4c, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  musicClip: {fileID: 8300000, guid: f5e0b1ee2b294f548a0ffa005e4dfcc3, type: 3}
+  musicOn: 0
 --- !u!1 &1429313958
 GameObject:
   m_ObjectHideFlags: 0
