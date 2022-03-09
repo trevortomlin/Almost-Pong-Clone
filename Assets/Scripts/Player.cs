@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     private float jumpTimer = 0f;
 
     private Vector2 rb2DStartPos;
+
+    public CameraShake cameraShake;
     
 
     // Start is called before the first frame update
@@ -70,6 +72,8 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
+        StartCoroutine(cameraShake.Shake(.2f, .1f));
+
         Vector2 direction = collision.GetContact(0).normal;
 
         if (direction.x == 1) {
@@ -88,6 +92,8 @@ public class Player : MonoBehaviour
     }
     void OnBecameInvisible()
     {
+
+        StartCoroutine(cameraShake.Shake(.2f, .4f));
 
         FindObjectOfType<AudioManager>().Play("Death");
 
