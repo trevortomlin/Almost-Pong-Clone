@@ -3,23 +3,21 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public int thrust = 1000;
-    public ParticleSystem deathParticles;
+    public CameraShake cameraShake;
 
+    [Header("Jump")]
+    public int thrust = 400;
     public float jumpCoolDown = .5f;
-
-    public int maxSpeed = 5;
-
-    private Rigidbody2D rb2D;
-
     private float jumpTimer = 0f;
 
+    [Header("Particles")]
+    public ParticleSystem deathParticles;
+    public ParticleSystem hitPaddleParticles;
+
+    [Header("RigidBody")]
+    private Rigidbody2D rb2D;
     private Vector2 rb2DStartPos;
-
-    public CameraShake cameraShake;
     
-
-    // Start is called before the first frame update
     void Start()
     {
         rb2D = gameObject.GetComponent<Rigidbody2D>();
@@ -32,7 +30,7 @@ public class Player : MonoBehaviour
 
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-        rb2D.AddForce(new Vector2(400, 0));
+        rb2D.AddForce(new Vector2(thrust, 0));
 
     }
 
@@ -57,7 +55,7 @@ public class Player : MonoBehaviour
             {
 
                 rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
-                rb2D.AddForce(new Vector2(0, 400));
+                rb2D.AddForce(new Vector2(0, thrust));
 
                 FindObjectOfType<AudioManager>().Play("Jump");
 
@@ -78,12 +76,14 @@ public class Player : MonoBehaviour
 
         if (direction.x == 1) {
 
-            rb2D.AddForce(new Vector2(400, 0));
+            rb2D.AddForce(new Vector2(thrust, 0));
+            Instantiate(hitPaddleParticles, this.transform.position, Quaternion.identity);
 
         }
         else if (direction.x == -1)
         {
-            rb2D.AddForce(new Vector2(-400, 0));
+            rb2D.AddForce(new Vector2(-thrust, 0));
+            Instantiate(hitPaddleParticles, this.transform.position, Quaternion.identity);
 
         }
 
