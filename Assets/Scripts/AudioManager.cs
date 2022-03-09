@@ -8,6 +8,10 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] sounds;
 
+    public AudioClip musicClip;
+
+    public bool musicOn = false;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -17,6 +21,16 @@ public class AudioManager : MonoBehaviour
         else
         {
             Instance = this;
+        }
+
+        if (musicOn) {
+
+            AudioSource musicAS = gameObject.AddComponent<AudioSource>();
+
+            musicAS.loop = true;
+            musicAS.clip = musicClip;
+            musicAS.Play();
+
         }
 
         foreach (Sound s in sounds) {
