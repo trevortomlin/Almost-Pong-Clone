@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -15,14 +13,32 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb2D;
 
     private float jumpTimer = 0f;
+
+    private Vector2 rb2DStartPos;
     
 
     // Start is called before the first frame update
     void Start()
     {
         rb2D = gameObject.GetComponent<Rigidbody2D>();
+        rb2DStartPos = rb2D.position;
+        rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
+    }
+
+    public void ApplyStartForce()
+    {
+
+        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+
         rb2D.AddForce(new Vector2(400, 0));
-        //rb2D.velocity += Vector2.up * 10;
+
+    }
+
+    public void Reset()
+    {
+        rb2D.velocity = Vector2.zero;
+        rb2D.position = rb2DStartPos;
+        rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
     }
 
     void Update()
@@ -37,8 +53,7 @@ public class Player : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                //Debug.Log("Clicked");
-                //rb2D.velocity = Vector2.zero;
+
                 rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
                 rb2D.AddForce(new Vector2(0, 400));
 
@@ -73,11 +88,13 @@ public class Player : MonoBehaviour
     }
     void OnBecameInvisible()
     {
-        Debug.Log("I`m gone :(");
 
         FindObjectOfType<AudioManager>().Play("Death");
+        FindObjectOfType<GameManager>().Reset();
 
         Instantiate (deathParticles, this.transform.position, Quaternion.identity);
+
+        PlayerPrefs.SetInt("HighScore", Mathf.Max(PlayerPrefs.GetInt("HighScore"), Score.score));
 
     }
 

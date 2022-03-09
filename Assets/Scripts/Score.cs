@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class Score : MonoBehaviour
@@ -20,6 +17,11 @@ public class Score : MonoBehaviour
         
         GetComponent<TextMeshProUGUI>().text = score.ToString();
 
+    }
+
+    public void Reset()
+    {
+        score = 0;
     }
 
 }
