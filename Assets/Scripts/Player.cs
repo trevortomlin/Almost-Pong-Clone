@@ -90,11 +90,14 @@ public class Player : MonoBehaviour
     {
 
         FindObjectOfType<AudioManager>().Play("Death");
-        FindObjectOfType<GameManager>().Reset();
 
         Instantiate (deathParticles, this.transform.position, Quaternion.identity);
 
-        PlayerPrefs.SetInt("HighScore", Mathf.Max(PlayerPrefs.GetInt("HighScore"), Score.score));
+        int highScore = Mathf.Max(PlayerPrefs.GetInt("HighScore"), Score.score);
+
+        PlayerPrefs.SetInt("HighScore", highScore);
+
+        FindObjectOfType<GameManager>().Reset();
 
     }
 

@@ -4,6 +4,8 @@ using TMPro;
 public class Score : MonoBehaviour
 {
     public static int score;
+
+    public TextMeshProUGUI scoreText;
     void Start()
     {
 
@@ -15,7 +17,7 @@ public class Score : MonoBehaviour
     void Update()
     {
         
-        GetComponent<TextMeshProUGUI>().text = score.ToString();
+        scoreText.text = score.ToString();
 
     }
 

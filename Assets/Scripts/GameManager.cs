@@ -32,8 +32,9 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
 
-        PlayerPrefs.SetInt("HighScore", 0);
-        highScoreText.text = "highscore: " + PlayerPrefs.GetInt("HighScore");
+        PlayerPrefs.DeleteAll();
+
+        highScoreText.text = "highscore: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
     }
 
     // Update is called once per frame
@@ -45,7 +46,6 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("start game");
                 startCanvas.enabled = false;
                 gameState = GameState.PLAYING;
                 player.ApplyStartForce();
@@ -60,7 +60,9 @@ public class GameManager : MonoBehaviour
         paddles.Reset();
         startCanvas.enabled = true;
         gameState = GameState.MENU;
+
+        highScoreText.text = "highscore: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
         Score.score = 0;
-        highScoreText.text = "highscore: " + PlayerPrefs.GetInt("HighScore");
+        
     }
 }
