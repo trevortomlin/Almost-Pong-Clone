@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
         //rb2D.velocity += Vector2.up * 10;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (jumpTimer > 0f) {
 
@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
             {
                 //Debug.Log("Clicked");
                 //rb2D.velocity = Vector2.zero;
+                rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
                 rb2D.AddForce(new Vector2(0, 400));
 
                 FindObjectOfType<AudioManager>().Play("Jump");
